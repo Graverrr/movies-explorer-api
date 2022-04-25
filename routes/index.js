@@ -2,7 +2,7 @@ const router = require('express').Router();
 const authRouter = require('./auth');
 const userRouter = require('./users');
 const movieRouter = require('./movies');
-const { auth } = require('../errors/NotFoundError');
+const auth = require('../middlewares/auth');
 const NotFoundError = require('../errors/NotFoundError');
 
 router.use(authRouter);

@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const users = require('./routes/users');
-const movies = require('./routes/movies');
 const errorHandler = require('./middlewares/errorHandler');
 const corsOptions = require('./utils/utils');
 
@@ -24,8 +22,10 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
 
 app.use(requestLogger);
 app.use(router);
-app.use(users);
-app.use(movies);
+
+app.use(require('./routes/users'));
+app.use(require('./routes/movies'));
+
 app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
