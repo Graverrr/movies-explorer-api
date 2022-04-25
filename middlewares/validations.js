@@ -11,42 +11,35 @@ const validatelink = (value) => {
 const validateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
-    about: Joi.string().min(2).max(30).required(),
+    email: Joi.string().required().email(),
   }),
 });
 
-const validateAvatar = celebrate({
+const validateMovie = celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().custom(validatelink).required(),
+    country: Joi.string().required().min(2).max(30),
+    director: Joi.string().required().min(2).max(30),
+    duration: Joi.number().required(),
+    year: Joi.string().required().min(2).max(4),
+    description: Joi.string().required().min(2).max(5000),
+    image: Joi.string().required().custom(validatelink),
+    trailerLink: Joi.string().required().custom(validatelink),
+    thumbnail: Joi.string().required().custom(validatelink),
+    movieId: Joi.number().required(),
+    nameRU: Joi.string().required().min(2).max(100),
+    nameEN: Joi.string().required().min(2).max(100),
   }),
 });
 
-const validateUserId = celebrate({
+const validateMovieId = celebrate({
   params: Joi.object().keys({
-    id: Joi.string().hex().length(24).required()
-      .alphanum(),
-  }),
-});
-
-const validateCardId = celebrate({
-  params: Joi.object().keys({
-    cardId: Joi.string().hex().length(24).required()
-      .alphanum(),
-  }),
-});
-
-const validateCard = celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    link: Joi.string().custom(validatelink).required(),
+    movieId: Joi.string().hex().length(24),
   }),
 });
 
 const validateSignup = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi.string().custom(validatelink),
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
   }),
@@ -61,10 +54,8 @@ const validateSignin = celebrate({
 
 module.exports = {
   validateUser,
-  validateAvatar,
-  validateUserId,
-  validateCardId,
-  validateCard,
+  validateMovie,
+  validateMovieId,
   validateSignup,
   validateSignin,
 };

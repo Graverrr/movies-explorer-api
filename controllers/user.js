@@ -87,7 +87,6 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       res.send({ jwt: token });
-      console.log(jwt.token, user);
     })
     .catch(next);
 };
