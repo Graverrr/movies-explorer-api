@@ -1,4 +1,6 @@
 const corsOptions = [
+  'https://api.diplom.grave.nomoredomains.work',
+  'https://diplom.grave.nomoredomains.work',
   'http://localhost:3001',
   'http://localhost:3000',
   'https://web.postman.co',
