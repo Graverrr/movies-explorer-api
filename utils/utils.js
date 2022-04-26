@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
   if (corsOptions.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
   }
+
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   res.header('Access-Control-Allow-Credentials', true);
