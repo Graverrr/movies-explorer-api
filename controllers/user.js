@@ -47,7 +47,7 @@ module.exports.createUser = (req, res, next) => {
     name, about, avatar, email, password,
   } = req.body;
   if (!email || !password) {
-    next(new ValidationError('Неверный логин или пароль'));
+    return next(new ValidationError('Неверный логин или пароль'));
   }
   User.findOne({ email })
     .then((user) => {
