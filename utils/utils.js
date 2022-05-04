@@ -7,7 +7,6 @@ const corsOptions = [
   'https://web.postman.co',
 ];
 
-// eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
   const { origin } = req.headers;
   if (corsOptions.includes(origin)) {
