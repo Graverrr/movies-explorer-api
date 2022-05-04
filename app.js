@@ -23,9 +23,6 @@ mongoose.connect('mongodb://localhost:27017/moviesdb', {
 app.use(requestLogger);
 app.use(router);
 
-app.use(require('./routes/users'));
-app.use(require('./routes/movies'));
-
 app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
