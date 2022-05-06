@@ -36,9 +36,10 @@ module.exports.updateUserInfo = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new ValidationError('Переданы некорректные данные'));
-      } else {
-        next(err);
+      } if (err.code === 11000) {
+        return next(new ConflictError('Email принадлежит другому пользователю'));
       }
+      return next(err);
     });
 };
 
