@@ -8,7 +8,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
 const corsOptions = require('./utils/utils');
 
-const { NODE_ENV, PORT } = process.env;
+const { NODE_ENV, PORT, DB_ADRESS } = process.env;
 const app = express();
 
 app.use(bodyParser.json());
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(corsOptions);
 
-mongoose.connect('mongodb://localhost:27017/moviesdb', {
+mongoose.connect(NODE_ENV === 'production' ? DB_ADRESS : 'mongodb://localhost:27017/moviesdb', {
   useNewUrlParser: true,
 });
 

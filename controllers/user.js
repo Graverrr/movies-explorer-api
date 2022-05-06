@@ -36,9 +36,10 @@ module.exports.updateUserInfo = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new ValidationError('Переданы некорректные данные'));
-      } else {
-        next(err);
+      } if (err.code === 11000) {
+        return next(new ConflictError('Email принадлежит другому пользователю'));
       }
+      return next(err);
     });
 };
 
@@ -47,7 +48,7 @@ module.exports.createUser = (req, res, next) => {
     name, about, avatar, email, password,
   } = req.body;
   if (!email || !password) {
-    next(new ValidationError('Неверный логин или пароль'));
+    return next(new ValidationError('Неверный логин или пароль'));
   }
   User.findOne({ email })
     .then((user) => {
